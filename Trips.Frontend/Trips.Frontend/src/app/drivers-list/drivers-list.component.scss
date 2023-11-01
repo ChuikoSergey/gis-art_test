@@ -1,0 +1,8 @@
+.drivers-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.drivers-list-container * {
+    margin: 5px;
+}

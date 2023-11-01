@@ -1,0 +1,18 @@
+<div class="drivers-list-container">
+    <div class="drivers-list-header">
+        <button kendoButton (click)="calculatePayableTimeClick()">Calculate Payable Time </button>
+        <kendo-textbox placeholder="Search" (valueChange)="onSearchValueChanged($event)"></kendo-textbox>
+    </div>
+    <kendo-grid 
+        [kendoGridBinding]="(drivers$ | async) || []"
+        [pageable]="true"
+        [pageSize]="20"
+        [resizable]="true"
+        [selectable]="selectableSettings"
+        [sortable]="sortSettings"
+        (sortChange)="sortChange($event)"
+        (selectionChange)="selectedRowChange($event)">
+        <kendo-grid-column field="name" title="Name"></kendo-grid-column>
+        <kendo-grid-column field="payableTime" title="Payable Time(min)"></kendo-grid-column>
+    </kendo-grid>
+</div>

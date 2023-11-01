@@ -1,0 +1,32 @@
+[
+    {
+        "Id": "75d70806-47e9-410f-82d5-77ecb5c74bb5",
+        "TripId": "1cc80906-88e3-4baf-9855-a4ec131b7307",
+        "PassengerId": "c1a9ec7c-87de-4884-ae03-b87afa0228df"
+    },
+    {
+        "Id": "fb3c688a-8589-4bf7-8bc8-8577850ce545",
+        "TripId": "1cc80906-88e3-4baf-9855-a4ec131b7307",
+        "PassengerId": "cb34f6ff-6a81-4f8a-a98c-7b3fed4903ae"
+    },
+    {
+        "Id": "2bb56d1f-fabe-4044-b519-f8050a0a5afb",
+        "TripId": "1cc80906-88e3-4baf-9855-a4ec131b7307",
+        "PassengerId": "d277cff1-88ab-4b5a-a89f-6fc3535e3a8f"
+    },
+    {
+        "Id": "3f9a4bce-1c59-43ca-8e4e-23a39418a46f",
+        "TripId": "68e92246-76c9-410b-8f73-dfa62b32edd4",
+        "PassengerId": "39a4b601-45cc-49d0-bf27-ddf0ccd22f6b"
+    },
+    {
+        "Id": "c19c99f6-7e93-43a8-a98f-94cb44298d35",
+        "TripId": "07e8a2dc-e96b-4f7d-831f-c6cae84edd83",
+        "PassengerId": "39a4b601-45cc-49d0-bf27-ddf0ccd22f6b"
+    },
+    {
+        "Id": "c445fb2b-e8ef-471f-8193-d25a2689b8cc",
+        "TripId": "94130245-d7d9-4788-a758-77065f1d22d1",
+        "PassengerId": "cb34f6ff-6a81-4f8a-a98c-7b3fed4903ae"
+    }
+]

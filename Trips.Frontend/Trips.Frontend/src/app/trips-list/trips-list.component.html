@@ -1,0 +1,18 @@
+<div class="trips-list-container">
+    <div class="trips-list-header">
+        <kendo-textbox placeholder="Search" (valueChange)="onSearchValueChanged($event)"></kendo-textbox>
+    </div>
+    <kendo-grid 
+        [kendoGridBinding]="(trips$ | async) || []"
+        [pageable]="true"
+        [pageSize]="20"
+        [sortable]="sortSettings"
+        (sortChange)="sortChange($event)"
+        [resizable]="true">
+        <kendo-grid-column field="id" title="ID"></kendo-grid-column>
+        <kendo-grid-column field="tripStartTimestamp" title="Start Time"></kendo-grid-column>
+        <kendo-grid-column field="tripEndTimestamp" title="End Time"></kendo-grid-column>
+        <kendo-grid-column field="startPlaceName" title="From"></kendo-grid-column>
+        <kendo-grid-column field="destinationPlaceName" title="To"></kendo-grid-column>
+    </kendo-grid>
+</div>

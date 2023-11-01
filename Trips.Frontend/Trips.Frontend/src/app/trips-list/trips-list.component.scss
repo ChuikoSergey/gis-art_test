@@ -1,0 +1,8 @@
+.trips-list-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.trips-list-container * {
+    margin: 5px;
+}
