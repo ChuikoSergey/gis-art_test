@@ -64,7 +64,7 @@ export class DriverState {
     calculatePayableTime(ctx: StateContext<DriverStateModel>, action: DriverActions.CalculatePayableTime) {
         this.driverService.calculateDriversPayableTime()
             .subscribe(response => {
-                ctx.dispatch(new DriverActions.Get());
+                ctx.dispatch(new DriverActions.Set(response));
             })
     }
 }

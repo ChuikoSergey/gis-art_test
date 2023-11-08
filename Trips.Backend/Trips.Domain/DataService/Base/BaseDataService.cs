@@ -22,7 +22,7 @@ public abstract class BaseDataService<TEntity> : IBaseDataService<TEntity> where
         }
     }
 
-    public async Task BulkRemoveAsync(IEnumerable<Guid> ids)
+    public async Task BulkRemoveAsync(IEnumerable<int> ids)
     {
         if (ids != null && ids.Any())
         {
@@ -44,7 +44,7 @@ public abstract class BaseDataService<TEntity> : IBaseDataService<TEntity> where
         }
     }
 
-    public async Task<Guid> CreateAsync(TEntity entity)
+    public async Task<int> CreateAsync(TEntity entity)
     {
         if (entity != null)
         {
@@ -52,20 +52,20 @@ public abstract class BaseDataService<TEntity> : IBaseDataService<TEntity> where
             await _repository.SaveChangesAsync();
             return entity.Id;
         }
-        return Guid.Empty;
+        return default(int);
     }
 
-    public Task<bool> ExistsByIdAsync(Guid id)
+    public Task<bool> ExistsByIdAsync(int id)
     {
         return Task.FromResult(_repository.Data.Any(e => e.Id == id));
     }
 
-    public Task<TEntity> GetByIdAsync(Guid id)
+    public Task<TEntity> GetByIdAsync(int id)
     {
         return Task.FromResult(_repository.Data.FirstOrDefault(e => e.Id == id));
     }
 
-    public async Task RemoveAsync(Guid id)
+    public async Task RemoveAsync(int id)
     {
         await _repository.RemoveAsync(id);
         await _repository.SaveChangesAsync();

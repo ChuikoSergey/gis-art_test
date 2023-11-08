@@ -22,12 +22,4 @@
     <ProjectReference Include="..\Trips.Domain\Trips.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ContentWithTargetPath Include="..\Trips.Data\Seed\Data\**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <TargetPath>Seed\Data\%(Filename)%(Extension)</TargetPath>
-      <TargetPath>..\..\..\Seed\Data\%(Filename)%(Extension)</TargetPath>
-    </ContentWithTargetPath>
-  </ItemGroup>
-
 </Project>

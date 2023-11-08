@@ -26,7 +26,7 @@ public class UnitTestContainer : IDisposable
         var configuration = configurationBuilder.Build();
 
         var services = new ServiceCollection();
-        services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+        services.AddDbContext<SysContext>(opt => opt.UseInMemoryDatabase(Guid.NewGuid().ToString()));
         services.Add(new ServiceDescriptor(typeof(IRepository<>), typeof(Repository<>), ServiceLifetime.Scoped));
         AddDataServices(services);
         services.Add(new ServiceDescriptor(typeof(ICalculationService), typeof(CalculationService), ServiceLifetime.Transient));

@@ -7,10 +7,10 @@ namespace Trips.Data.Repository;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
 {
-    private readonly DataContext _context;
+    private readonly SysContext _context;
     private readonly DbSet<TEntity> _dbSet;
 
-    public Repository(DataContext context)
+    public Repository(SysContext context)
     {
         _context = context;
         _dbSet = context.Set<TEntity>();
@@ -68,7 +68,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
         return Task.CompletedTask;
     }
 
-    public async Task RemoveAsync(Guid id)
+    public async Task RemoveAsync(int id)
     {
         var entity = await _dbSet.FirstOrDefaultAsync(e => e.Id == id);
         if (entity == null)

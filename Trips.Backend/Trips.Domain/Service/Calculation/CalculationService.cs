@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
-using Trips.Core;
-using Trips.Core.DataService.Driver;
-using Trips.Core.DataService.Trip;
-using Trips.Core.Entities;
+using Trips.Core.DataService.Trips;
+using Trips.Core.DTO.Driver;
+using Trips.Core.DTO.Trip;
 using Trips.Core.Service.Calculation;
 using Trips.Domain.Configuration;
 
@@ -10,39 +9,45 @@ namespace Trips.Domain.Service.Calculation;
 
 public class CalculationService : ICalculationService
 {
-    private readonly IDriverDataService _driverDataService;
     private readonly ITripDataService _tripDataService;
     private readonly int _batchSize;
 
     public CalculationService(
-        IDriverDataService driverDataService,
         ITripDataService tripDataService,
         IOptions<BatchSizeConfiguration> batchSizeConfiguration)
     {
-        _driverDataService = driverDataService;
         _tripDataService = tripDataService;
         _batchSize = batchSizeConfiguration.Value.DriverPayableTimeCalculation;
     }
 
-    public async Task CalculateDriversPayableTime()
+    public async Task<List<DriverListTableDto>> CalculateDriversPayableTimeAsync()
     {
-        var drivers = await _driverDataService.GetAllAsync();
-        var payableTimes = await _tripDataService.GetTripTimeByDrivers(drivers.Select(d => d.Id));
+        var drivers = await _tripDataService.GetAllDriversIds();
+        var payableTimes = await _tripDataService.GetTripTimeByDrivers(drivers);
         var groupedPayableTimes = payableTimes.GroupBy(pt => pt.DriverId).ToDictionary(g => g.Key);
-        var calculationTasks = drivers.Chunk(_batchSize).Select(c => CalculateDriversPayableTime(c, groupedPayableTimes));
+        var calculationTasks = drivers.Chunk(_batchSize).Select(c => CalculateDriversPayableTimeAsync(c, groupedPayableTimes));
         var tasksResult = await Task.WhenAll(calculationTasks);
-        var updatedDrivers = tasksResult.SelectMany(result => result);
-        await _driverDataService.BulkUpdateAsync(updatedDrivers);
+        var updatedDrivers = tasksResult.SelectMany(result => result).ToList();
+        return updatedDrivers;
     }
 
-    private async Task<IEnumerable<Driver>> CalculateDriversPayableTime(
-        IEnumerable<Driver> drivers,
-        IDictionary<Guid, IGrouping<Guid, DriverTripTimeDto>> groupedPayableTimes)
+    private async Task<IEnumerable<DriverListTableDto>> CalculateDriversPayableTimeAsync(
+        IEnumerable<int> driverIds,
+        IDictionary<int, IGrouping<int, DriverTripTimeDto>> groupedPayableTimes)
     {
-        foreach (var driver in drivers)
+        var result = new List<DriverListTableDto>();
+        foreach (var driverId in driverIds) 
         {
-            driver.PayableTime = groupedPayableTimes[driver.Id].Sum(pt => (pt.TripEndTimestamp - pt.TripStartTimestamp).TotalMinutes);
+            var driver = new DriverListTableDto();
+            driver.Id = driverId;
+            driver.PayableTime = groupedPayableTimes[driver.Id].Sum(pt => 
+            {
+                var pickup = DateTime.Parse(pt.Pickup);
+                var dropof = DateTime.Parse(pt.Dropoff);
+                return (dropof - pickup).TotalMinutes;
+            });
+            result.Add(driver);
         }
-        return drivers;
+        return result;
     }
 }

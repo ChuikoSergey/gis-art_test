@@ -5,11 +5,11 @@ namespace Trips.Core.DTO.Trip;
 public class TripTableDto
 {
     [Searchable]
-    public Guid Id { get; set; }
-    public DateTime TripStartTimestamp { get; set; }
-    public DateTime TripEndTimestamp { get; set; }
+    public int Id { get; set; }
     [Searchable]
-    public string StartPlaceName { get; set; } = string.Empty;
+    public int DriverId { get; set; }    
     [Searchable]
-    public string DestinationPlaceName { get; set; } = string.Empty;
+    public string? Pickup { get; set; }
+    [Searchable]
+    public string? Dropoff { get; set; }
 }

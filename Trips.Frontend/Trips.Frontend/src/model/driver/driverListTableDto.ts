@@ -1,6 +1,6 @@
 export class DriverListTableDto {
     public PayableTime? : number | undefined;
-    public Name! : string;
+    public Id! : number;
 
     public constructor(init?:Partial<DriverListTableDto>) {
         Object.assign(this, init);

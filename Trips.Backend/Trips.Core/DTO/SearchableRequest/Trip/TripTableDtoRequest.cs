@@ -2,5 +2,5 @@
 
 public class TripTableDtoRequest : SearchableRequest
 {
-    public Guid? DriverId { get; set; }
+    public int? DriverId { get; set; }
 }

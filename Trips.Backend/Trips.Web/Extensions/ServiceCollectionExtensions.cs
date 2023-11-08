@@ -14,9 +14,11 @@ public static class ServiceCollectionExtensions
 {
     public static void AddDataContext(this WebApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<DataContext>(options => 
+        builder.Services.AddDbContext<SysContext>(options => 
         {
-            options.UseNpgsql(builder.Configuration["Database:ConnectionString"]);
+            options.UseMySql(
+                builder.Configuration["Database:ConnectionString"],
+                new MySqlServerVersion(new Version(builder.Configuration["Database:Version"])));
             options.EnableSensitiveDataLogging(true);
         });
     }

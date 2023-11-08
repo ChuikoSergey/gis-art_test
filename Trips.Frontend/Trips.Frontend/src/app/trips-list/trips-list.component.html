@@ -2,6 +2,7 @@
     <div class="trips-list-header">
         <kendo-textbox placeholder="Search" (valueChange)="onSearchValueChanged($event)"></kendo-textbox>
     </div>
+    <h1>Trips</h1>
     <kendo-grid 
         [kendoGridBinding]="(trips$ | async) || []"
         [pageable]="true"
@@ -10,9 +11,8 @@
         (sortChange)="sortChange($event)"
         [resizable]="true">
         <kendo-grid-column field="id" title="ID"></kendo-grid-column>
-        <kendo-grid-column field="tripStartTimestamp" title="Start Time"></kendo-grid-column>
-        <kendo-grid-column field="tripEndTimestamp" title="End Time"></kendo-grid-column>
-        <kendo-grid-column field="startPlaceName" title="From"></kendo-grid-column>
-        <kendo-grid-column field="destinationPlaceName" title="To"></kendo-grid-column>
+        <kendo-grid-column field="driverId" title="Driver Id"></kendo-grid-column>
+        <kendo-grid-column field="pickup" title="Pickup"></kendo-grid-column>
+        <kendo-grid-column field="dropoff" title="Dropoff"></kendo-grid-column>
     </kendo-grid>
 </div>

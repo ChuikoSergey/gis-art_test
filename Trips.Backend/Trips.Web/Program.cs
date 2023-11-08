@@ -32,6 +32,4 @@ app.UseCors(cpb => cpb.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.MapControllers();
 
-app.MigrateDbContext<DataContext>();
-
 app.Run();

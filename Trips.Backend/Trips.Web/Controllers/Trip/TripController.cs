@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Trips.Core.DataService.Trip;
+using Trips.Core.DataService.Trips;
 using Trips.Core.DTO.SearchableRequest.Trip;
 
 namespace Trips.Web;

@@ -45,15 +45,8 @@ export class DriversListComponent {
     }
   }
 
-  sortChange(sort: SortDescriptor[]) {
-    const sortFields = sort[0];
-    this.store.dispatch(new DriverActions.Get({
-      AscendingOrder: sortFields?.dir == 'asc',
-      OrderBy: sortFields?.field
-    }));
-  }
-
   onSearchValueChanged(newValue: string) {
     this.store.dispatch(new DriverActions.Get({SearchBy : newValue}));
+    this.store.dispatch(new TripActions.GetByDriver({DriverId: null}));
   }
 }
